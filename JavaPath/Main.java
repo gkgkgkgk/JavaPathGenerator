@@ -19,6 +19,7 @@ public class Main extends JPanel implements ActionListener {
 
 	int minimumStep = 0;
 	
+	int width = 100;
 	
 	boolean rightD = false;
 	
@@ -47,15 +48,15 @@ public class Main extends JPanel implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
-        //System.out.println("Run");
         generateNewRow();
-				
 		minimumStep++;
+				
 		
 		if(minimumStep >= 20){
 			if(Math.random() < 0.5){
 				rightD = true;
 				minimumStep = 0;
+				width = (int)(Math.random() * 101);
 			}
 			if(Math.random() >= 0.5){
 				rightD = false;
@@ -63,7 +64,7 @@ public class Main extends JPanel implements ActionListener {
 			}
 		}
 			
-if(left.getX() < 100){
+	if(left.getX() < 100){
 			rightD = true;
 			minimumStep = 0;
 
@@ -76,13 +77,16 @@ if(left.getX() < 100){
 				
 		if(!rightD){
 			left.setX(left.getX() -1);
-			right.setX(left.getX() + 100);
+			right.setX(left.getX() + width);
 		}
 		else if(rightD){
 			left.setX(left.getX() +1);
-			right.setX(left.getX() + 100);
+			right.setX(left.getX() + width);
 		}
 		
+		
+		/*left.setX((int) (175.0 * Math.cos(minimumStep)));
+		right.setX(left.getX() + 100);*/
         repaint();
     }
 
