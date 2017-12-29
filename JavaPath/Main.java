@@ -17,6 +17,9 @@ public class Main extends JPanel implements ActionListener {
 
     CellRemover right = new CellRemover(250, 100);
 
+	int minimumStep = 0;
+	
+	
 	boolean rightD = false;
 	
     public Main() {
@@ -46,7 +49,31 @@ public class Main extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //System.out.println("Run");
         generateNewRow();
+				
+		minimumStep++;
 		
+		if(minimumStep >= 20){
+			if(Math.random() < 0.5){
+				rightD = true;
+				minimumStep = 0;
+			}
+			if(Math.random() >= 0.5){
+				rightD = false;
+				minimumStep = 0;
+			}
+		}
+			
+if(left.getX() < 100){
+			rightD = true;
+			minimumStep = 0;
+
+		}
+		if(left.getX() > 200){
+			rightD = false;
+			minimumStep = 0;
+
+		}			
+				
 		if(!rightD){
 			left.setX(left.getX() -1);
 			right.setX(left.getX() + 100);
@@ -54,12 +81,6 @@ public class Main extends JPanel implements ActionListener {
 		else if(rightD){
 			left.setX(left.getX() +1);
 			right.setX(left.getX() + 100);
-		}
-		if(left.getX() < 100 && !rightD){
-			rightD = true;
-		}
-		if(left.getX() > 200 && rightD){
-			rightD = false;
 		}
 		
         repaint();
